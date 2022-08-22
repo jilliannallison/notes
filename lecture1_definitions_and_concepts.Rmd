@@ -1,0 +1,70 @@
+---
+title: 'Reproducible Workflows Intro: Definitions and Concepts'
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Reproducibility 
+- reproducibility = someone else can recreate the final reported results of the project (including figures, findings, tables) using only a set of files and written instructions 
+- the reproducibility spectrum 
+
+(only you can use your work at this time) 
+
+re-runnable > repeatable > reproducible > replicable > reusable 
+
+(largest contribution to community)
+
+- the ability to work reproducibly is a skill that needs to be learned-- it's difficult to make your work truly reproducible 
+
+- reproducibility is good for science, for collaboration, and for your own productivity 
+
+### Analytical Workflows 
+
+- what a researcher does to make advances on scientific questions: developing hypotheses, wrangling data, writing code, and interpreting results 
+
+##### workflow 
+PROGRAM: [import > tidy > (visualize, transform, model) > communicate]
+
+- the path you take to get to the final reproducible product 
+- reproducibility should be on your mind from the moment you start the project--- reproducibility is part of our workflow 
+
+### Steps towards reproducible analytical workflows
+##### Step 1: Plan 
+- what kind of data or computing power do we need? 
+- what steps should we take?
+- who should do what? 
+- how will you share and preserve your work? 
+
+##### Step 2: Script 
+- script every step of your workflow, avoid using GUI or copy pasting in spreadsheets. 
+- spreadsheets: they're still super popular and useful for env. data, but they encourage mixing data and analysis, which we don't really want! 
+
+##### Step 3: Encapsulate 
+- centralize the information in one / a few folders
+- avoid duplication
+- use relative paths 
+- capture the computing environment (the tools you use matter, mac vs windows, versions of R, let people know what you're using)
+===> this makes your work more portable and easy to document 
+
+##### Step 4: Separate 
+- keep raw data separate
+- keep processed / derived data separate 
+- keep analysis separate
+- keep final results separate from intermediate results 
+
+##### Step 5: Document 
+- code, functions, derived data, methodology, computing environment, file names
+
+##### Step 6: Share
+- put work out early, 
+- ask for feedback, contributions
+- archive data and code in repositories 
+##### Planning: flowcharts and pseudocode 
+
+
+
