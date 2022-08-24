@@ -1,0 +1,24 @@
+---
+title: "Day 2: Analytical Workflows as a Team"
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Coding as a team
+- helps you grow as a programmer! well documented work, communicating
+
+#### Code review/feedback 
+- asynchronous team activity
+- great opportunity to have more eyes on your code
+- reviewer should see this activity as a great way to learn from others 
+
+### Pair programming
+- synchronous team activity: several programmers get to work together on the same piece of code 
+- Driver = the person typing at the computer
+- Navigator(s) = do  not write code, focus on finding solutions to the problem. use of their computer should be limited to searching online for solutions 
+

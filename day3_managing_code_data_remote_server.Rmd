@@ -1,0 +1,198 @@
+---
+title: "Day 3: Managing your Code and Data on a Remote Server"
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Using API's to programatically retrieve data
+
+-   search.dataone.org/data is a good data website
+
+#### Networks and routes 
+
+-   computers on a network are called hosts
+-   host computers connect via networking equipment
+-   hosts are assigned a unique IP address
+-   routing connects networks together by forwarding data along routing paths
+-   each IP address can be used to communicate over ports
+-   ports allow multiple applications to communicate with a host without mixing up traffic (email, web, file transfer protocol all have different port numbers)
+
+### The world wide web
+
+-   URL = Uniform Resource Locator
+-   get = get an existing resource, post = create a new resource
+-   response numbers-- 2XX = successful, 3XX = redirection, 4XX = client error, **5XX = server error**
+-   html document type = Hypertext Markup Language tells us what a website should contain
+
+### Application Programming Interfaces (API)
+
+-   Constructs built into third-party platforms (e.g. Twitter, Facebook, data repositories) that allow you to use some of those platform's functionality in your own script. They abstract more complex code away from you, providing some easier syntax to use in its place.
+-   types of API's-
+    -   REST = Representational State Transfer- common
+-   You often need to use some kind of authentication (often token) to use an API --- they do not want one user using all of the server's resources
+
+### XML document type 
+
+-   The e**X**tensible **M**arkup **L**anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables.
+
+    XML provides the basic, common, and quite simple structure and syntax. It is the building block of `HTML`, `SVG` and `EML` are specific vocabularies of XML.
+
+### JSON document type 
+
+-   **J**ava**S**cript **O**bject **N**otation (JSON) is an open data interchange format that uses human-readable text to store and transmit data objects consisting of attribute--value pairs and arrays (or other serializable values)
+
+-   convenient for nesting information
+
+### Interacting with API 
+
+-   {httr} is an R package that let's you send requests to web services
+
+-   GET() function can retrieve info from the internet
+
+```{r}
+library(httr)
+library(purrr)
+# Querying the the GitHub REST api
+r <- GET("https://api.github.com/users/jilliannallison/repos")
+# Extract the content from the response
+my_repos_list <- content(r) 
+# Extract what we want from the list
+my_repos <- map_chr(my_repos_list, "full_name") # this is a function from purrr --- mapping what is in the list against something - give all full names across all elements of a list 
+my_repos[1:10]
+# Another way of extracting info from the list 
+my_repos_2 <- my_repos_list[[3]]$full_name
+my_repos_2
+```
+
+-   we have another option for getting information from an API, which is arguably better
+
+-   many R packages allow you to interact with data from an API in a much simpler way
+
+    -   <https://ropensci.org/packages/data-access/>
+
+    -   <https://github.com/USGS-R/dataRetrieval>
+
+### Debugging with an API
+
+-   debugging code that relys on an API is hard!
+
+-   paywalls, server issues, server information
+
+-   **A good sign of an unreliable API is when your code seems to not consistently fail or provide variable results when ran several times in a row**
+
+-   webscrapping is a thing, if they don't maintain an API {rvest}
+
+    -   <https://r-meetup-sb.github.io/web-scraping-rvest/index.html#4_Web_scraping_workflow>
+
+## Managing data driven projects as a team 
+
+### Managing files as a team
+
+-   keep all files in the same place-- centralize!
+
+-   group work questions
+
+    -   "Can everybody have access to this tool?"
+
+    -   what practices should you set on how to use these tools?
+
+    -   allow flexibility- acknowledge the technological level varies among collaborators -- empower them by showing them tools
+
+-   discuss:
+
+    -   naming conventions
+
+    -   organizing things in github --- data should be in a shared folder that is available to all
+
+-   structure of a script
+
+    -   summary explaining purpose of the script
+
+    -   attribution: authors, date of last update, contact info
+
+    -   import of external modules / packages
+
+    -   constant definitions / paths? (g = 9.81)
+
+    -   function definitions (ideally respecting the order in which they are called)
+
+    -   main code calling the different functions
+
+-   useful practices
+
+    -   comment your code
+
+    -   store variables and constants in objects
+
+    -   choose descriptive names
+
+    -   be consistent with your style
+
+    -   keep it simple, stupid
+
+    -   go modular -- break down tasks into code chunks
+
+    -   dont repeat yourself
+
+    -   test your code
+
+    -   iterate with small steps
+
+-   DATA
+
+    -   keep raw data separate from processed data
+
+        -   data folder--- raw and processed subfolders
+
+Reproducible workflow with rrtools
+
+    remotes::install_github("benmarwick/rrtools")
+    rrtools::use_compendium("mypaper")
+
+    Next, you need to:  ↓ ↓ ↓ 
+    ● Edit the DESCRIPTION file
+    ● Use other 'rrtools' functions to add components to the compendium
+
+`rrtools` has created the beginnings of a research compendium for us. At this point, it looks mostly the same as an R package. That\'s because it uses the same underlying folder structure and metadata and therefore it technically is an R package. And this means our research compendium will be easy to install, just like an R package.
+
+Before we get to writing our reproducible paper, let\'s fill in some more structure. Let\'s:
+
+1.  Add a license (always a good idea)
+
+2.  Set up a README file in the RMarkdown format
+
+3.  Create an `analysis` folder to hold our reproducible paper
+
+```{=html}
+<!-- -->
+```
+    usethis::use_apl2_license() # Change this
+    rrtools::use_readme_rmd()
+    rrtools::use_analysis()
+
+At this point, we\'re ready to start writing the paper. To follow the structure `rrtools` has put in place for us, here are some pointers:
+
+-   Edit `./analysis/paper/paper.Rmd` to begin writing your paper and your analysis in the same document
+
+-   Add any citations to `./analysis/paper/references.bib`
+
+-   Add any longer R scripts that don\'t fit in your paper in an `R` folder at the top level
+
+-   Add raw data to `./data/raw_data`
+
+-   Write out any derived data (generated in `paper.Rmd`) to `./data/derived_data`
+
+-   Write out any figures in `./analysis/figures`
+
+It would also be a good idea to initialize this folder as a git repo for maximum reproducibility:
+
+    usethis::use_git()
+
+After that, push a copy up to [**GitHub**](https://github.com/).
+
+Hopefully, now that you\'ve created a research compendium with `rrtools`, you can imagine how a pre-defined structure like the one `rrtools` creates might help you organize your reproducible research and also make it easier for others to understand your work.\
