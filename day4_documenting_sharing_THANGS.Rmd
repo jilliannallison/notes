@@ -1,0 +1,123 @@
+---
+title: 'Day 4: Documenting and Sharing Things'
+author: "Jillian Allison"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Documentation
+
+### Read me's
+
+-   title capturing essence of project
+-   short explanation of the goal and purpose
+-   how to install / where to start
+-   quick demo on how to use the content
+-   what to do if a bug is spotted
+-   how to contribute
+-   licensing
+-   acknowledgements of authors, contributors, sponsors, or other related work
+-   adding images and short videos / animations can make a README more engaging
+-   make a readme by creating a project using usethis::
+
+### Making readable code
+
+-   comments!
+    -   short to the point valuable annoying comments-- most code isn't too trivial to comment on
+-   headers
+    -   purpose of script, authors, contact email
+-   inline comments
+-   document functions with roxygen
+-   leverage notebooks like rmd, quarto
+
+### Data provenance and semantics 
+
+-   tracing the origin of a data set to the raw-data that were used as input of the processing / analysis that led to the creation of this data set
+
+    -   Source / owner (Person, institution, website, ....)
+
+    -   When was it acquired ?
+
+    -   By whom on the WG ?
+
+    -   Where is it currently located (Google drive, server, ....) ?
+
+    -   Short description of the data
+
+    -   Track if it is used in your analysis
+
+Template: <https://docs.google.com/spreadsheets/d/1LLpOyydCGTZdY8Xk2fDmTPVy8efF-47GtEXkAjvYsJI/edit#gid=0>
+
+### Licensing 
+
+-   It is a good practice to add a license to a repository / project. It will help to clarify what are the expectations regarding using and potentially contributing to this work.
+
+-   there was a function for making licensing stuff
+
+## Sharing Things
+
+### R Shiny 
+
+-   R Shiny is a very interesting framework that lets you write R code that will then be translated into javascript for you and thus let you develop web application without having to learn any new programming language. Note that you will need a server to host the application.
+
+-   Check out this gallery of shiny apps: [**https://shiny.rstudio.com/gallery/**](https://shiny.rstudio.com/gallery/)
+
+-   Getting started with Shiny: [**https://shiny.rstudio.com/tutorial/**](https://shiny.rstudio.com/tutorial/)
+
+### Html widgets
+
+-   Html widgets offer some great interactive data visualization. It is more limited that Shiny because you can not modify parameters to modify the data use, but it has the advantage that it does not need a server to run the widget and it can be inserted directly into an R Markdown.
+
+-   Here to get started: [**https://www.htmlwidgets.org/**](https://www.htmlwidgets.org/)
+
+### plotly 
+
+[**`plotly`**](https://plotly.com/) enable you to develop great interactive data visualizations. It has the advantage to be available both in [**R**](https://plotly.com/r/) and [**Python**](https://plotly.com/python/) (and javascript). One great thing in R is that if you are a ggplot master, you can write your plot code using ggplot and transform it into a plotly plot with one line of code ([**here**](https://plotly.com/ggplot2/getting-started/) for an example)
+
+Note there are also other python libraries to create interactive plots, here are a few: [**https://mode.com/blog/python-interactive-plot-libraries/**](https://mode.com/blog/python-interactive-plot-libraries/)
+
+### Jupyter 
+
+Transform your `git` based repo into an interactive jupyter notebook [**https://mybinder.org/**](https://mybinder.org/)!! So other researchers can run your code without having to install anything!
+
+### Citing your code
+
+Note that it is also possible to assign a [**DOI**](https://en.wikipedia.org/wiki/Digital_object_identifier) to cite a specific version of your repository. For example, see [**here**](https://guides.github.com/activities/citable-code/) for more information on how to link [**Zenodo**](https://zenodo.org/) and GitHub.
+
+It is important to be able to reference to yourself as a researcher and as an author of your work in a non ambiguous manner. From their website: [***ORCID***](https://info.orcid.org/what-is-orcid/) *is a great way to create a persistent digital identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher.* ORCID is also more and more use as an authentication system for many services (e.g. data repositories).
+
+## Your own computer
+
+### Session info
+
+Your analysis was done with specific versions both of the program used but also of all the packages involved, as well as the specifications of Operating System (OS) that was used. The good use is that there ar tools to let you capture this information in a systematic manner.
+
+    sessionInfo()
+
+    devtools::session_info()
+
+You can save all this content to an `session_info.txt` file and upload it to your repository.\
+
+### Containers
+
+A helpful abstraction for capturing the computing environment is a container, whereby a container is created from a set of instructions in a recipe. For the most common containerisation software, Docker, this recipe is called a Dockerfile. Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure and ship the containers to others. A Docker container can be seen as a computer inside your computer.Code friendly Presentations
+
+## Code Friendly Presentations
+
+### Xarigan
+
+Xarigan is an R package to create slide deck using R Markdown: [**https://github.com/yihui/xaringan**](https://github.com/yihui/xaringan)
+
+    remotes::install_github('yihui/xaringan')
+
+Here is a good introduction to it: [**https://www.favstats.eu/post/xaringan_tut/**](https://www.favstats.eu/post/xaringan_tut/)
+
+### Quarto Presentations
+
+[**https://quarto.org/docs/presentations/**](https://quarto.org/docs/presentations/)
+
+[**https://meghan.rbind.io/blog/quarto-slides/**](https://meghan.rbind.io/blog/quarto-slides/)
